@@ -1,0 +1,180 @@
+/*#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_VERTICES 100
+
+// Graph represented using adjacency list
+typedef struct Node {
+    int vertex;
+    struct Node* next;
+} Node;
+
+Node* adjList[MAX_VERTICES];
+int visited[MAX_VERTICES];
+
+// Function to create a new adjacency list node
+Node* createNode(int vertex) {
+struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = v;
+    newNode->next = NULL;
+    return newNode;
+}
+    
+    
+}
+
+// Function to add an edge to the graph
+void addEdge(int u, int v) {
+    struct Node* newNode = createNode(v);
+
+    // Insert in sorted order
+    
+    
+    
+}
+
+// Function to sort the adjacency list for each vertex
+void sortAdjList(int V) {
+struct Node* newNode = createNode(v);
+    
+    // Insert into linked list in ascending order
+    if (adjList[u] == NULL || v < adjList[u]->data) {
+        newNode->next = adjList[u];
+        adjList[u] = newNode;
+    } else {
+        struct Node* curr = adjList[u];
+        while (curr->next != NULL && curr->next->data < v) {
+            curr = curr->next;
+        }
+        newNode->next = curr->next;
+        curr->next = newNode;
+}
+
+// Depth-First Search (DFS) function
+void DFS(int start) {nt start, struct Node* adj[], int visited[]) {
+    visited[start] = 1;
+    printf("%d ", start);
+
+    struct Node* temp = adj[start];
+    while (temp != NULL) {
+        int v = temp->data;
+        if (!visited[v]) {
+            DFS(v, adj, visited);
+        }
+        temp = temp->next;
+    }
+					
+    
+    
+    
+    
+    
+}
+
+int main() {
+    int V, E;
+    int u, v, start;
+
+    // Read number of vertices and edges
+    scanf("%d %d", &V, &E);
+
+    // Initialize adjacency list
+    for (int i = 0; i < V; i++) {
+        adjList[i] = NULL;
+        visited[i] = 0;
+    }
+
+    // Read the edges
+    for (int i = 0; i < E; i++) {
+        scanf("%d %d", &u, &v);
+        addEdge(u, v);
+    }
+
+    // Sort the adjacency list for each vertex
+    sortAdjList(V);
+
+    // Read the starting node
+    scanf("%d", &start);
+
+    // Perform DFS starting from the given node
+    DFS(start);
+
+    return 0;
+}*/#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 100
+
+// Node structure
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Global arrays
+struct Node* adjList[MAX];
+int visited[MAX];
+
+// Create node
+struct Node* createNode(int v) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = v;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Add edge (directed graph)
+void addEdge(int u, int v) {
+    struct Node* newNode = createNode(v);
+
+    if (adjList[u] == NULL || v < adjList[u]->data) {
+        newNode->next = adjList[u];
+        adjList[u] = newNode;
+    } else {
+        struct Node* curr = adjList[u];
+        while (curr->next != NULL && curr->next->data < v) {
+            curr = curr->next;
+        }
+        newNode->next = curr->next;
+        curr->next = newNode;
+    }
+}
+
+// DFS
+void DFS(int start) {
+    visited[start] = 1;
+    printf("%d ", start);
+
+    struct Node* temp = adjList[start];
+
+    while (temp != NULL) {
+        int v = temp->data;
+        if (!visited[v]) {
+            DFS(v);
+        }
+        temp = temp->next;
+    }
+}
+
+int main() {
+    int V, E;
+    int u, v, start;
+
+    scanf("%d %d", &V, &E);
+
+    for (int i = 0; i < V; i++) {
+        adjList[i] = NULL;
+        visited[i] = 0;
+    }
+
+    for (int i = 0; i < E; i++) {
+        scanf("%d %d", &u, &v);
+        addEdge(u, v);  // Directed graph
+    }
+
+    scanf("%d", &start);
+
+    DFS(start);
+
+    return 0;
+}
